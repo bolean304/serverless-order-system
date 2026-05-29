@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: DynamoDB table for the order service.
+
+Parameters:
+  TableName:
+    Type: String
+    Default: Orders
+    Description: DynamoDB table name used by ORDER_TABLE_NAME.
+
+Resources:
+  OrdersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref TableName
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: PK
+          AttributeType: S
+        - AttributeName: SK
+          AttributeType: S
+      KeySchema:
+        - AttributeName: PK
+          KeyType: HASH
+        - AttributeName: SK
+          KeyType: RANGE
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      SSESpecification:
+        SSEEnabled: true
+
+Outputs:
+  OrdersTableName:
+    Description: DynamoDB table name.
+    Value: !Ref OrdersTable
+  OrdersTableArn:
+    Description: DynamoDB table ARN.
+    Value: !GetAtt OrdersTable.Arn

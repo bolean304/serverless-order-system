@@ -1,0 +1,14 @@
+.gocache/
+.gitconfig
+
+# Lambda build artifacts
+bootstrap
+function.zip
+cmd/bootstrap
+cmd/function.zip
+cmd/main
+*.exe
+
+# Local environment files
+.env
+.env.*
